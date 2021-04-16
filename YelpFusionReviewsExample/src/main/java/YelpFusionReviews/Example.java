@@ -111,9 +111,9 @@ public class Example {
                     "venue : " + venue,
                     "location : " + addressFormatted,
                     "rating : " + rating,
-                    "review: " + text};
+                    "text: " + text};
             String json = gson.toJson(yelpData);
-            System.out.print(json);
+            System.out.println("{ review: \n" + json + " \n}");
 
 
         } catch (IOException e) {
