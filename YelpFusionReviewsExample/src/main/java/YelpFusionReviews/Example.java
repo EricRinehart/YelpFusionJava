@@ -14,6 +14,8 @@ import java.io.IOException;
 import okhttp3.*;
 import okhttp3.Request.Builder;
 import org.json.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class Example {
 
@@ -65,10 +67,7 @@ public class Example {
             venue = myResponseID.getJSONObject(INDEX_ID).getString("name");
             venueLocation = myResponseID.getJSONObject(INDEX_ID).getJSONObject("location");
             address = (JSONArray)venueLocation.get("display_address");
-            String temp = address.toString();
-            addressFormatted = temp.replace("[", "").replace("]", "");
-
-
+          
 
         } catch (IOException e) {
             // TODO Auto-generated catch block
@@ -100,13 +99,19 @@ public class Example {
             user = myResponseReviews.getJSONObject(INDEX_REVIEW).getJSONObject("user");
             String name = (String)user.get("name");
             String imageUrl = (String)user.get("image_url");
-            System.out.println(name);
-            System.out.println(imageUrl);
-            System.out.println(venue);
-            System.out.println(addressFormatted);
-            System.out.println(myResponseReviews.getJSONObject(INDEX_REVIEW).getInt("rating"));
-            System.out.println(myResponseReviews.getJSONObject(INDEX_REVIEW).getString("text")); // According to Yelp API up to 160 characters of text will show
+            int rating = myResponseReviews.getJSONObject(INDEX_REVIEW).getInt("rating");
+            String text = myResponseReviews.getJSONObject(INDEX_REVIEW).getString("text");
 
+            // display output in JSON format
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            String[] yelpData = {"name: " + name,
+                    "image url : " + imageUrl,
+                    "venue : " + venue,
+                    "location : " + String.valueOf(address),
+                    "rating : " + String.valueOf(rating),
+                    "review: " + text};
+            String json = gson.toJson(yelpData);
+            System.out.println(json);
 
 
         } catch (IOException e) {
