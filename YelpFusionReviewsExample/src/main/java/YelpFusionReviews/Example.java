@@ -102,7 +102,7 @@ public class Example {
             String name = (String)user.get("name");
             String imageUrl = (String)user.get("image_url");
             int rating = myResponseReviews.getJSONObject(INDEX_REVIEW).getInt("rating");
-            String text = myResponseReviews.getJSONObject(INDEX_REVIEW).getString("text"); // According to Yelp API only up t0 160 of text will be retrieved
+            String text = myResponseReviews.getJSONObject(INDEX_REVIEW).getString("text"); // According to Yelp API only up to 160 characters of text will be retrieved
 
             // display output in JSON format
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
