@@ -105,7 +105,7 @@ public class Example {
             System.out.println(venue);
             System.out.println(addressFormatted);
             System.out.println(myResponseReviews.getJSONObject(INDEX_REVIEW).getInt("rating"));
-            System.out.println(myResponseReviews.getJSONObject(INDEX_REVIEW).getString("text"));
+            System.out.println(myResponseReviews.getJSONObject(INDEX_REVIEW).getString("text")); // According to Yelp API up to 160 characters of text will show
 
 
 
