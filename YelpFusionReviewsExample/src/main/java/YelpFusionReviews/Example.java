@@ -19,8 +19,8 @@ public class Example {
 
     public static void main(String[] args)throws JSONException, IOException {
 
-        // unique API key from Yelp
-        final String YOUR_API_KEY = "xfJjPbDeriW2TcJcQeiEgh0rdBWqchWEtEb1IkKMZpLKWPEm8xBWghBSpX13MG1pMmohAk7nPPFUd5rckHo_Y4rLIcM05NZvduzX4lyD-HUbPP60osQmtdZhfl13YHYx";
+        // unique API key from Yelp located in Manage App
+        final String YOUR_API_KEY = <YOUR API KEY>;
 
         // indexes for traversing JSON String body
         final int INDEX_ID = 0;
