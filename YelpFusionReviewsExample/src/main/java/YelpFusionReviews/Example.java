@@ -111,7 +111,7 @@ public class Example {
                     "rating : " + String.valueOf(rating),
                     "review: " + text};
             String json = gson.toJson(yelpData);
-            System.out.println(json);
+            System.out.print(json);
 
 
         } catch (IOException e) {
