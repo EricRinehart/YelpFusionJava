@@ -67,6 +67,8 @@ public class Example {
             venue = myResponseID.getJSONObject(INDEX_ID).getString("name");
             venueLocation = myResponseID.getJSONObject(INDEX_ID).getJSONObject("location");
             address = (JSONArray)venueLocation.get("display_address");
+            String temp = address.toString();
+            addressFormatted = temp.replace("\"","");
           
 
         } catch (IOException e) {
@@ -107,8 +109,8 @@ public class Example {
             String[] yelpData = {"name: " + name,
                     "image url : " + imageUrl,
                     "venue : " + venue,
-                    "location : " + String.valueOf(address),
-                    "rating : " + String.valueOf(rating),
+                    "location : " + addressFormatted,
+                    "rating : " + rating,
                     "review: " + text};
             String json = gson.toJson(yelpData);
             System.out.print(json);
