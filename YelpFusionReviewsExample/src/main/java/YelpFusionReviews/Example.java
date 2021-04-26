@@ -32,8 +32,8 @@ public class Example {
         final String TERM = "pasta"; // Yelp requires a String term which can be food like coffee or even a name like Starbucks
         final String SEARCH_LOCATION = "Durham, NC"; // Yelp requires a location <city, state>
         String id = "";
-        String venue = "";
-        JSONObject venueLocation = null;
+        String business = "";
+        JSONObject businessLocation = null;
         JSONArray address = null;
         String addressFormatted = "";
         JSONObject user = null;
@@ -64,9 +64,9 @@ public class Example {
             JSONObject jsonObject = new JSONObject(responseID.body().string().trim()); // parser
             JSONArray myResponseID = (JSONArray)jsonObject.get("businesses");
             id = myResponseID.getJSONObject(INDEX_ID).getString("id");
-            venue = myResponseID.getJSONObject(INDEX_ID).getString("name");
-            venueLocation = myResponseID.getJSONObject(INDEX_ID).getJSONObject("location");
-            address = (JSONArray)venueLocation.get("display_address");
+            business = myResponseID.getJSONObject(INDEX_ID).getString("name");
+            businessLocation = myResponseID.getJSONObject(INDEX_ID).getJSONObject("location");
+            address = (JSONArray)businessLocation.get("display_address");
             String temp = address.toString();
             addressFormatted = temp.replace("\"","");
           
@@ -108,7 +108,7 @@ public class Example {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             String[] yelpData = {"name: " + name,
                     "image url : " + imageUrl,
-                    "venue : " + venue,
+                    "business : " + business,
                     "location : " + addressFormatted,
                     "rating : " + rating,
                     "text: " + text};
