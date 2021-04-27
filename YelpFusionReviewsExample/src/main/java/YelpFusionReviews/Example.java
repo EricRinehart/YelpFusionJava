@@ -112,8 +112,9 @@ public class Example {
                     "location : " + addressFormatted,
                     "rating : " + rating,
                     "text: " + text};
-            String json = gson.toJson(yelpData);
-            System.out.println("{ review: \n" + json + " \n}");
+            String yelpReview = gson.toJson(yelpData);
+            String yelpReviewJSON = "{ review: \n" + yelpReview + " \n}";
+            System.out.println(yelpReviewJSON);
 
 
         } catch (IOException e) {
