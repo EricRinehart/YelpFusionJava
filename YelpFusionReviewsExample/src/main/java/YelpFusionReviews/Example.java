@@ -125,7 +125,7 @@ public class Example {
             Set<Map.Entry<String, Object>> dataSet = data.entrySet();
             //convert data set to array
             List<Map.Entry<String, Object>> reviewValues = new ArrayList<>( dataSet );
-            //create one object{"review": [array of data]} - now data can be accessed with first key as an array of values
+            //create one object{"review": [array of data]} - now data can be accessed with review key as an array of values
             yelpReview.put(REVIEW_KEY, reviewValues);
 
             //display ordered JSON format
