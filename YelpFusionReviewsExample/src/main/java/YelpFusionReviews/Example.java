@@ -11,10 +11,11 @@ package YelpFusionReviews;
  */
 
 import java.io.IOException;
+import java.util.*;
 import okhttp3.*;
 import okhttp3.Request.Builder;
 import org.json.*;
-import java.util.TreeMap;
+
 
 public class Example {
 
@@ -43,7 +44,6 @@ public class Example {
         String business = "";
         JSONObject businessLocation = null;
         JSONArray address = null;
-        String addressFormatted = "";
         JSONObject user = null;
 
         // client to send requests from
@@ -120,8 +120,15 @@ public class Example {
             data.put(RATING_KEY, rating);
             data.put(TEXT_KEY, text);
             yelpReview.put(REVIEW_KEY, data);
+         
+            //convert data map to set
+            Set<Map.Entry<String, Object>> dataSet = data.entrySet();
+            //convert data set to array
+            List<Map.Entry<String, Object>> reviewValues = new ArrayList<>( dataSet );
+            //create one object{"review": [array of data]} - now data can be accessed with first key as an array of values
+            yelpReview.put(REVIEW_KEY, reviewValues);
 
-            //display in JSON format
+            //display ordered JSON format
             System.out.println("{ \""+ yelpReview.firstKey() +"\" :\n" +
                     "[\"" + NAME_KEY + "\" : \"" + data.get(NAME_KEY) + "\"\n" +
                     "\"" + IMAGE_KEY + "\" : \"" + data.get(IMAGE_KEY) + "\"\n" +
