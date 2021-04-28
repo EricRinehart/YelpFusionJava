@@ -69,7 +69,7 @@ public class Example {
             businessLocation = myResponseID.getJSONObject(INDEX_ID).getJSONObject("location");
             address = (JSONArray)businessLocation.get("display_address");
             String temp = address.toString();
-            addressFormatted = temp.replace("\"","");
+            addressFormatted = temp.replace("\"","").replace("[","").replace("]","");
          
           
 
@@ -94,7 +94,7 @@ public class Example {
              Get user information to display from review
              User information to display includes name and image_url
              Get rating and text from review to display
-             Display business info collected from 1st response
+             Display business info collected from 1st and 2nd request
              */
             Response responseReviews = client.newCall(requestReviews).execute();
 
@@ -106,17 +106,13 @@ public class Example {
             int rating = myResponseReviews.getJSONObject(INDEX_REVIEW).getInt("rating");
             String text = myResponseReviews.getJSONObject(INDEX_REVIEW).getString("text"); // According to Yelp API only up to 160 characters of text will be retrieved
 
+            //create review object for JSON data
+            Review yelpReview = new Review(name, imageUrl, business, addressFormatted, rating, text);
+
             // display output in JSON format
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            String[] yelpData = {"name: " + name,
-                    "image url : " + imageUrl,
-                    "business : " + business,
-                    "location : " + addressFormatted,
-                    "rating : " + rating,
-                    "text: " + text};
-            String yelpReview = gson.toJson(yelpData);
-            String yelpReviewJSON = "{ \"review: \n" + yelpReview + " \"\n}";
-            System.out.println(yelpReviewJSON);
+            String json = gson.toJson(yelpReview);
+            System.out.println(json);
 
 
 
@@ -127,5 +123,63 @@ public class Example {
 
     }
 
+}
+
+// review object to collect yelp data
+class Review {
+
+    private String name;
+    private String imageUrl;
+    private String business;
+    private String location;
+    private int rating;
+    private String text;
+
+    Review(String name, String imageUrl, String business, String location, int rating, String text) {
+        this.name = name;
+        this.imageUrl = imageUrl;
+        this.business = business;
+        this.location = location;
+        this.rating = rating;
+        this.text = text;
+    }
+
+    // unused getters and setters
+    public void setName(String name){
+        name = this.name;
+    }
+    public String getName(){
+        return name;
+    }
+    public void setImageUrl(String imageUrl){
+        imageUrl = this.imageUrl;
+    }
+    public String getImageUrl(){
+        return imageUrl;
+    }
+    public void setBusiness(String business){
+        business = this.business;
+    }
+    public String getBusiness(){
+        return business;
+    }
+    public void setLocation(String location){
+        location = this.location;
+    }
+    public String getLocation(){
+        return location;
+    }
+    public void setRating(int rating){
+       rating  = this.rating;
+    }
+    public int getRating(){
+        return rating;
+    }
+    public void setText(String text){
+        text = this.text;
+    }
+    public String getText(){
+        return text;
+    }
 }
 
