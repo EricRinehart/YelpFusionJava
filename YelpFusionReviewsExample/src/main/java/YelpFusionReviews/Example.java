@@ -107,7 +107,13 @@ public class Example {
             String text = myResponseReviews.getJSONObject(INDEX_REVIEW).getString("text"); // According to Yelp API only up to 160 characters of text will be retrieved
 
             //create review object for JSON data
-            Review yelpReview = new Review(name, imageUrl, business, addressFormatted, rating, text);
+            Review yelpReview = new Review();
+            yelpReview.setName(name);
+            yelpReview.setImageUrl(imageUrl);
+            yelpReview.setBusiness(business);
+            yelpReview.setLocation(addressFormatted);
+            yelpReview.setRating(rating);
+            yelpReview.setText(text);
 
             // display output in JSON format
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -135,48 +141,41 @@ class Review {
     private int rating;
     private String text;
 
-    Review(String name, String imageUrl, String business, String location, int rating, String text) {
-        this.name = name;
-        this.imageUrl = imageUrl;
-        this.business = business;
-        this.location = location;
-        this.rating = rating;
-        this.text = text;
-    }
+    //use default constructor
 
-    // unused getters and setters
+    // getters and setters
     public void setName(String name){
-        name = this.name;
+        this.name = name;
     }
     public String getName(){
         return name;
     }
     public void setImageUrl(String imageUrl){
-        imageUrl = this.imageUrl;
+        this.imageUrl = imageUrl;
     }
     public String getImageUrl(){
         return imageUrl;
     }
     public void setBusiness(String business){
-        business = this.business;
+        this.business = business;
     }
     public String getBusiness(){
         return business;
     }
     public void setLocation(String location){
-        location = this.location;
+        this.location = location;
     }
     public String getLocation(){
         return location;
     }
     public void setRating(int rating){
-       rating  = this.rating;
+       this.rating = rating;
     }
     public int getRating(){
         return rating;
     }
     public void setText(String text){
-        text = this.text;
+        this.text = text;
     }
     public String getText(){
         return text;
