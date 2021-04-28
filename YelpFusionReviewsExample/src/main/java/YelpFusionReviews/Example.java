@@ -36,8 +36,15 @@ public class Example {
         String business = "";
         JSONObject businessLocation = null;
         JSONArray address = null;
+        String temp = "";
         String addressFormatted = "";
         JSONObject user = null;
+        String name= "";
+        String imageUrl = "";
+        int rating = 0;
+        String text = "";
+        String json = "";
+        Gson gson = null;
 
         // client to send requests from
         OkHttpClient client = new OkHttpClient();
@@ -68,7 +75,7 @@ public class Example {
             business = myResponseID.getJSONObject(INDEX_ID).getString("name");
             businessLocation = myResponseID.getJSONObject(INDEX_ID).getJSONObject("location");
             address = (JSONArray)businessLocation.get("display_address");
-            String temp = address.toString();
+            temp = address.toString();
             addressFormatted = temp.replace("\"","").replace("[","").replace("]","");
          
           
@@ -101,10 +108,10 @@ public class Example {
             JSONObject jsonObject = new JSONObject(responseReviews.body().string().trim()); // parser
             JSONArray myResponseReviews = (JSONArray)jsonObject.get("reviews");
             user = myResponseReviews.getJSONObject(INDEX_REVIEW).getJSONObject("user");
-            String name = (String)user.get("name");
-            String imageUrl = (String)user.get("image_url");
-            int rating = myResponseReviews.getJSONObject(INDEX_REVIEW).getInt("rating");
-            String text = myResponseReviews.getJSONObject(INDEX_REVIEW).getString("text"); // According to Yelp API only up to 160 characters of text will be retrieved
+            name = (String)user.get("name");
+            imageUrl = (String)user.get("image_url");
+            rating = myResponseReviews.getJSONObject(INDEX_REVIEW).getInt("rating");
+            text = myResponseReviews.getJSONObject(INDEX_REVIEW).getString("text"); // According to Yelp API only up to 160 characters of text will be retrieved
 
             //create review object for JSON data
             Review yelpReview = new Review();
@@ -116,8 +123,8 @@ public class Example {
             yelpReview.setText(text);
 
             // display output in JSON format
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            String json = gson.toJson(yelpReview);
+            gson = new GsonBuilder().setPrettyPrinting().create();
+            json = gson.toJson(yelpReview);
             System.out.println(json);
 
 
