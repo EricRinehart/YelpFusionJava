@@ -11,10 +11,11 @@ package YelpFusionReviews;
  */
 
 import java.io.IOException;
-import java.util.*;
 import okhttp3.*;
 import okhttp3.Request.Builder;
 import org.json.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 
 public class Example {
@@ -28,15 +29,6 @@ public class Example {
         final int INDEX_ID = 0; //by default returns 20 reviews but up to 50
         final int INDEX_REVIEW = 0; // review only returns 3 reviews so values 3 and on will fail
      
-        // Strings for key values in treemap
-        final String REVIEW_KEY = "review";
-        final String NAME_KEY = "name";
-        final String IMAGE_KEY = "image_url";
-        final String BUSINESS_KEY = "business";
-        final String LOCATION_KEY = "location";
-        final String RATING_KEY = "rating";
-        final String TEXT_KEY = "text";
-
         // GET /businesses/search parameters
         final String TERM = "pasta"; // Yelp requires a String term which can be food like coffee or even a name like Starbucks
         final String SEARCH_LOCATION = "Durham, NC"; // Yelp requires a location <city, state>
@@ -44,6 +36,7 @@ public class Example {
         String business = "";
         JSONObject businessLocation = null;
         JSONArray address = null;
+        String addressFormatted = "";
         JSONObject user = null;
 
         // client to send requests from
@@ -75,6 +68,9 @@ public class Example {
             business = myResponseID.getJSONObject(INDEX_ID).getString("name");
             businessLocation = myResponseID.getJSONObject(INDEX_ID).getJSONObject("location");
             address = (JSONArray)businessLocation.get("display_address");
+            String temp = address.toString();
+            addressFormatted = temp.replace("\"","");
+         
           
 
         } catch (IOException e) {
@@ -110,32 +106,17 @@ public class Example {
             int rating = myResponseReviews.getJSONObject(INDEX_REVIEW).getInt("rating");
             String text = myResponseReviews.getJSONObject(INDEX_REVIEW).getString("text"); // According to Yelp API only up to 160 characters of text will be retrieved
 
-            // create a treemap to hold review object and to help access data for display
-            TreeMap<String, Object> yelpReview = new TreeMap<>();
-            TreeMap<String, Object> data = new TreeMap<>();
-            data.put(NAME_KEY, name);
-            data.put(IMAGE_KEY, imageUrl);
-            data.put(BUSINESS_KEY, business);
-            data.put(LOCATION_KEY, address);
-            data.put(RATING_KEY, rating);
-            data.put(TEXT_KEY, text);
-            yelpReview.put(REVIEW_KEY, data);
-         
-            //convert data map to set
-            Set<Map.Entry<String, Object>> dataSet = data.entrySet();
-            //convert data set to array
-            List<Map.Entry<String, Object>> reviewValues = new ArrayList<>( dataSet );
-            //create one object{"review": [array of data]} - now data can be accessed with review key as an array of values
-            yelpReview.put(REVIEW_KEY, reviewValues);
-
-            //display ordered JSON format
-            System.out.println("{ \""+ yelpReview.firstKey() +"\" :\n" +
-                    "[\"" + NAME_KEY + "\" : \"" + data.get(NAME_KEY) + "\"\n" +
-                    "\"" + IMAGE_KEY + "\" : \"" + data.get(IMAGE_KEY) + "\"\n" +
-                    "\"" + BUSINESS_KEY + "\" : \"" + data.get(BUSINESS_KEY) + "\"\n" +
-                    "\"" + LOCATION_KEY + "\" : " + data.get(LOCATION_KEY) + "\n" +
-                    "\"" + RATING_KEY + "\" : " + data.get(RATING_KEY) + "\n" +
-                    "\"" + TEXT_KEY + "\" : \"" + data.get(TEXT_KEY) + "\"]\n}");
+            // display output in JSON format
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            String[] yelpData = {"name: " + name,
+                    "image url : " + imageUrl,
+                    "business : " + business,
+                    "location : " + addressFormatted,
+                    "rating : " + rating,
+                    "text: " + text};
+            String yelpReview = gson.toJson(yelpData);
+            String yelpReviewJSON = "{ \"review: \n" + yelpReview + " \"\n}";
+            System.out.println(yelpReviewJSON);
 
 
 
