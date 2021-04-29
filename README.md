@@ -24,6 +24,46 @@ During the second search get the reviewers name, image url, rating, and review t
 Next make a list using the data retrieved - a list of maps<String,Object> provides key value pairing that fits JSON specificiations.
 Use Gson to make JSON output easier to read and display the review data.
 An alternative solution uses a review Object and its Overriden toString make use of String's similarity to a List.
+The output looks as follows:
+[
+
+  {
+  
+    "name": "Eve S."
+    
+  },
+  
+  {
+  
+    "image_url": "https://s3-media3.fl.yelpcdn.com/photo/X0-bJV8-GF-EuMC0R9sDPg/o.jpg"
+    
+  },
+  
+  {
+  
+    "business": "Cucciolo Osteria"
+    
+  },
+  
+  {
+  
+    "location": "601 W Main St,Ste C,Durham, NC 27701"
+    
+  },
+  
+  {
+  
+    "rating": 5
+    
+  },
+  
+  {
+  
+    "text": "Classy, great ambiance, AND onsite parking? Yes ma\u0027am. This industrial/modern yet upscale Italian restaurant was a great dinner experience. \n\nI am SO happy..."
+    
+  }
+  
+]
 
 Why use Yelp Fusion API instead of scraping? 
 The API provides access to Yelp's data
