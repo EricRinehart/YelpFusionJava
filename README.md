@@ -26,8 +26,9 @@ Use Gson to make JSON output easier to read and display the review data.
 Alternatively, using a review Object instead of a list produces readable JSON.
 
 Why use Yelp Fusion API instead of scraping? 
-Because API provide access to Yelp's data
-and webpages change meaning a scraper's code could be harder to maintain and get the expected results.
+The API provides access to Yelp's data
+and webpages change frequently. 
+Thereby a scraper's code may more frequently produce unexpected results and could be harder to maintain.
 
 
 
