@@ -23,7 +23,7 @@ During the second search get the reviewers name, image url, rating, and review t
 
 Next make a list using the data retrieved - a list of maps<String,Object> provides key value pairing that fits JSON specificiations.
 Use Gson to make JSON output easier to read and display the review data.
-Alternatively, using a review Object instead of a list produces readable JSON.
+An alternative solution uses a review Object and its Overriden toString make use of String's similarity to a List.
 
 Why use Yelp Fusion API instead of scraping? 
 The API provides access to Yelp's data
