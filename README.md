@@ -2,7 +2,8 @@
 
 Build and API endpoint to process Yelp data as JSON output.
 
-Prerequisites include Maven, JSON, GSON, OKHTTP, and Yelp API account.
+Prerequisites include Maven, JSON, GSON, OKHTTP, and Yelp API account. 
+A Yelp API account is free to obtain and does not require a credit card for set up.
 
 Project requirements include:
 obtain a restaurant's review data from Yelp,
