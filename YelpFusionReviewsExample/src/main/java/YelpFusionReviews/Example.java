@@ -11,7 +11,7 @@ package YelpFusionReviews;
  */
 
 import java.io.IOException;
-import java.util.*;
+import java.util.*; // uneeded for alternate solution
 import okhttp3.*;
 import okhttp3.Request.Builder;
 import org.json.*;
@@ -139,6 +139,19 @@ public class Example {
             gson = new GsonBuilder().setPrettyPrinting().create();
             json = gson.toJson(yelpReview);
             System.out.println(json);
+         
+            //lines 117-141 replaced with following for alternate solution
+            /*
+            //create review object for JSON data and display attributes as JSON
+            Review yelpReview = new Review();
+            yelpReview.setName(name);
+            yelpReview.setImageUrl(imageUrl);
+            yelpReview.setBusiness(business);
+            yelpReview.setLocation(addressFormatted);
+            yelpReview.setRating(rating);
+            yelpReview.setText(text);
+            yelpReview.toString();
+            */
 
 
 
@@ -150,4 +163,76 @@ public class Example {
     }
 
 }
+
+//class needed for alternate solution
+/*
+// review object to collect yelp data
+class Review {
+
+    private String name;
+    private String imageUrl;
+    private String business;
+    private String location;
+    private int rating;
+    private String text;
+
+    //use default constructor
+
+    // getters and setters
+    public void setName(String name){
+        this.name = name;
+    }
+    public String getName(){
+        return name;
+    }
+    public void setImageUrl(String imageUrl){
+        this.imageUrl = imageUrl;
+    }
+    public String getImageUrl(){
+        return imageUrl;
+    }
+    public void setBusiness(String business){
+        this.business = business;
+    }
+    public String getBusiness(){
+        return business;
+    }
+    public void setLocation(String location){
+        this.location = location;
+    }
+    public String getLocation(){
+        return location;
+    }
+    public void setRating(int rating){
+        this.rating = rating;
+    }
+    public int getRating(){
+        return rating;
+    }
+    public void setText(String text){
+        this.text = text;
+    }
+    public String getText(){
+        return text;
+    }
+
+    @Override
+    public String toString(){
+
+
+        this.getName();
+        this.getImageUrl();
+        this.getBusiness();
+        this.getLocation();
+        this.getRating();
+        this.getText();
+
+        // display list in JSON format
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String json = gson.toJson(this);
+        return json;
+
+    }
+}
+*/
 
