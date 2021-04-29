@@ -11,6 +11,7 @@ package YelpFusionReviews;
  */
 
 import java.io.IOException;
+import java.util.*;
 import okhttp3.*;
 import okhttp3.Request.Builder;
 import org.json.*;
@@ -113,14 +114,26 @@ public class Example {
             rating = myResponseReviews.getJSONObject(INDEX_REVIEW).getInt("rating");
             text = myResponseReviews.getJSONObject(INDEX_REVIEW).getString("text"); // According to Yelp API only up to 160 characters of text will be retrieved
 
-            //create review object for JSON data
-            Review yelpReview = new Review();
-            yelpReview.setName(name);
-            yelpReview.setImageUrl(imageUrl);
-            yelpReview.setBusiness(business);
-            yelpReview.setLocation(addressFormatted);
-            yelpReview.setRating(rating);
-            yelpReview.setText(text);
+            // create a list of key value pairs representing the review of the restaurant
+            List<Map<String,Object>> yelpReview = new ArrayList<>();
+            Map<String,Object> nameMap = new HashMap<>();
+            nameMap.put("name",name);
+            yelpReview.add(nameMap);
+            Map<String,Object> imageMap = new HashMap<>();
+            imageMap.put("image_url",imageUrl);
+            yelpReview.add(imageMap);
+            Map<String,Object> businessMap = new HashMap<>();
+            businessMap.put("business",business);
+            yelpReview.add(businessMap);
+            Map<String,Object> locationMap = new HashMap<>();
+            locationMap.put("location",addressFormatted);
+            yelpReview.add(locationMap);
+            Map<String,Object> ratingMap = new HashMap<>();
+            ratingMap.put("rating",rating);
+            yelpReview.add(ratingMap);
+            Map<String,Object> textMap = new HashMap<>();
+            textMap.put("text",text);
+            yelpReview.add(textMap);
 
             // display output in JSON format
             gson = new GsonBuilder().setPrettyPrinting().create();
@@ -136,56 +149,5 @@ public class Example {
 
     }
 
-}
-
-// review object to collect yelp data
-class Review {
-
-    private String name;
-    private String imageUrl;
-    private String business;
-    private String location;
-    private int rating;
-    private String text;
-
-    //use default constructor
-
-    // getters and setters
-    public void setName(String name){
-        this.name = name;
-    }
-    public String getName(){
-        return name;
-    }
-    public void setImageUrl(String imageUrl){
-        this.imageUrl = imageUrl;
-    }
-    public String getImageUrl(){
-        return imageUrl;
-    }
-    public void setBusiness(String business){
-        this.business = business;
-    }
-    public String getBusiness(){
-        return business;
-    }
-    public void setLocation(String location){
-        this.location = location;
-    }
-    public String getLocation(){
-        return location;
-    }
-    public void setRating(int rating){
-       this.rating = rating;
-    }
-    public int getRating(){
-        return rating;
-    }
-    public void setText(String text){
-        this.text = text;
-    }
-    public String getText(){
-        return text;
-    }
 }
 
