@@ -1,7 +1,7 @@
 package YelpFusionReviews;
 
 /*
- An API endpoint in Java and Spring Boot
+ An API endpoint in Java and Spring Framework
  This uses key authentication to access Yelp Fusion API
  2 requests are made to access Yelp's data
  The 1st request retrieves a business ID and business data to display later
