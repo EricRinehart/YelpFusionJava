@@ -123,7 +123,7 @@ public class Example {
             yelpReview.setRating(rating);
             yelpReview.setText(text);
             System.out.println(yelpReview.toString());
-            */
+            
 
 
 
