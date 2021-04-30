@@ -11,7 +11,6 @@ package YelpFusionReviews;
  */
 
 import java.io.IOException;
-import java.util.*; // uneeded for alternate solution
 import okhttp3.*;
 import okhttp3.Request.Builder;
 import org.json.*;
@@ -114,34 +113,7 @@ public class Example {
             rating = myResponseReviews.getJSONObject(INDEX_REVIEW).getInt("rating");
             text = myResponseReviews.getJSONObject(INDEX_REVIEW).getString("text"); // According to Yelp API only up to 160 characters of text will be retrieved
 
-            // create a list of key value pairs representing the review of the restaurant
-            List<Map<String,Object>> yelpReview = new ArrayList<>();
-            Map<String,Object> nameMap = new HashMap<>();
-            nameMap.put("name",name);
-            yelpReview.add(nameMap);
-            Map<String,Object> imageMap = new HashMap<>();
-            imageMap.put("image_url",imageUrl);
-            yelpReview.add(imageMap);
-            Map<String,Object> businessMap = new HashMap<>();
-            businessMap.put("business",business);
-            yelpReview.add(businessMap);
-            Map<String,Object> locationMap = new HashMap<>();
-            locationMap.put("location",addressFormatted);
-            yelpReview.add(locationMap);
-            Map<String,Object> ratingMap = new HashMap<>();
-            ratingMap.put("rating",rating);
-            yelpReview.add(ratingMap);
-            Map<String,Object> textMap = new HashMap<>();
-            textMap.put("text",text);
-            yelpReview.add(textMap);
-
-            // display output in JSON format
-            gson = new GsonBuilder().setPrettyPrinting().create();
-            json = gson.toJson(yelpReview);
-            System.out.println(json);
-         
-            //lines 117-141 replaced with following for alternate solution
-            /*
+        
             //create review object for JSON data and display attributes as JSON
             Review yelpReview = new Review();
             yelpReview.setName(name);
@@ -164,8 +136,7 @@ public class Example {
 
 }
 
-//class needed for alternate solution
-/*
+
 // review object to collect yelp data
 class Review {
 
@@ -226,5 +197,5 @@ class Review {
 
     }
 }
-*/
+
 
