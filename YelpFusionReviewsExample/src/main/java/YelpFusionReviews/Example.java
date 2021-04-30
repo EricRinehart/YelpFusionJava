@@ -219,14 +219,6 @@ class Review {
     @Override
     public String toString(){
 
-
-        this.getName();
-        this.getImageUrl();
-        this.getBusiness();
-        this.getLocation();
-        this.getRating();
-        this.getText();
-
         // display list in JSON format
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String json = gson.toJson(this);
