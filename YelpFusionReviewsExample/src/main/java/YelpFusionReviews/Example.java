@@ -150,7 +150,7 @@ public class Example {
             yelpReview.setLocation(addressFormatted);
             yelpReview.setRating(rating);
             yelpReview.setText(text);
-            yelpReview.toString();
+            System.out.println(yelpReview.toString());
             */
 
 
